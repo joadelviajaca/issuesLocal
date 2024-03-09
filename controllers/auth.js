@@ -38,10 +38,11 @@ const login = async(req, res = response) => {
         const payload = { uid: user.id};
         const token = jwt.sign( payload, 'Est03sMyPub1cK3y54@453', {expiresIn: '4h'})
 
+        res.set('Authorization', `Bearer ${token}`);
         res.json({
             user,
-            token
-        })
+            msg: 'Inicio de sesión exitoso'
+        });
 
     } catch (error) {
         console.log(error)
@@ -59,12 +60,13 @@ const validateToken = async(req, res = response ) => {
 
     // Generar el JWT
     const payload = { uid: user.id};
-    const token = jwt.sign( payload, process.env.SECRET, {expiresIn: '4h'})
+    const token = jwt.sign( payload, 'Est03sMyPub1cK3y54@453', {expiresIn: '4h'})
 
-    res.json({
-        user,
-        token
-    })
+    res.set('Authorization', `Bearer ${token}`);
+        res.json({
+            user,
+            msg: 'Token renovado'
+        });
 
 }
 
