@@ -3,18 +3,15 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 const validateJWT = async (req = request, res = response, next) => {
-    const authHeader = req.header('Authorization');
+    const token = req.header('x-token');
 
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    if (!token) {
         return res.status(401).json({
-            msg: 'No hay token de autenticación en la petición o no está en el formato correcto'
+            msg: 'No hay token en la petición'
         });
     }
 
-   
-
     try {
-        const token = authHeader.split(' ')[1];
         //const payload = jwt.verify(token, process.env.SECRETORPRIVATEKEY);
         const { uid } = jwt.verify(token, 'Est03sMyPub1cK3y54@453');
         //req.uid = uid;
