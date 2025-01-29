@@ -18,7 +18,7 @@ router.get('/issues/:id', [
 
 // Ruta para crear una nueva incidencia
 router.post('/issues', [
-  validateJWT,
+  // validateJWT,
   body('title').notEmpty().withMessage('El título es obligatorio'),
   body('description').notEmpty().withMessage('La descripción es obligatoria'),
   validateFields
@@ -26,7 +26,7 @@ router.post('/issues', [
 
 // Ruta para actualizar una incidencia existente
 router.put('/issues/:id', [
-  validateJWT,
+  // validateJWT,
   check('id', 'No es un id correcto').isMongoId(),
   body('title').notEmpty().withMessage('El título es obligatorio'),
   body('description').notEmpty().withMessage('La descripción es obligatoria'),
@@ -36,8 +36,8 @@ router.put('/issues/:id', [
 
 // Ruta para eliminar una incidencia
 router.delete('/issues/:id', [
-  validateJWT,
-  hasRole('ADMIN_ROLE'),
+  // validateJWT,
+  // hasRole('ADMIN_ROLE'),
   check('id', 'No es un id correcto').isMongoId(),
   validateFields
 ], issuesController.deleteIssue);
