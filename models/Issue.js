@@ -7,4 +7,10 @@ const issueSchema = new mongoose.Schema({
   status: { type: String, default: 'abierta' }
 });
 
+issueSchema.methods.toJSON = function() {
+  const { __v, _id, ...issue  } = this.toObject();
+  issue.id = _id;
+  return issue;
+}
+
 module.exports = mongoose.model('Issue', issueSchema);
